@@ -2,6 +2,7 @@
 
 import RPIO
 import threading 
+
 print("Starting RFID reader...")
 
 tag = "" #The buffer used to store the RFID Tag
@@ -46,8 +47,8 @@ def addBitToTag(gpio_id, val):
 		tag += "1"		
 
 #We set the pins to Input
-RPIO.setup(GPIO_0, RPIO.IN, pull_up_down=RPIO.PUD_UP)
-RPIO.setup(GPIO_1, RPIO.IN, pull_up_down=RPIO.PUD_UP)
+RPIO.setup(GPIO_0, RPIO.IN)
+RPIO.setup(GPIO_1, RPIO.IN)
 
 #We register our callback on the pins events
 RPIO.add_interrupt_callback(GPIO_0, addBitToTag, edge='falling', pull_up_down=RPIO.PUD_UP)
@@ -59,5 +60,6 @@ t.start()
 
 #Ready message
 print("Ready to go !")
+
 
 RPIO.wait_for_interrupts()
