@@ -11,7 +11,7 @@ tag = "" #The buffer used to store the RFID Tag
 GPIO_0 = 23
 GPIO_1 = 24
 
-BIT_TRANSMISSION_TIME = 0.00205 #From wiegand specification
+BIT_TRANSMISSION_TIME = 0.002 #From wiegand specification
 FRAMESIZE = 26 #Supposed size of received frame
 FRAMETIME = FRAMESIZE * BIT_TRANSMISSION_TIME #Theoric time necessary to transfer a frame
 ALLOWANCE = 10 #Auhtorized allowance for the transmission time
