@@ -20,10 +20,7 @@ for reader in readersList:
     print(" Done !")
     readersCount += 1
 
-
 #Ready message
 print("Ready to go !")
-
-
 
 RPIO.wait_for_interrupts()
