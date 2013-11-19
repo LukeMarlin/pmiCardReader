@@ -31,6 +31,9 @@ class CardReader(object):
 		RPIO.setup(self.GPIO_1, RPIO.IN)
 		RPIO.add_interrupt_callback(self.GPIO_0, self.addBitToTag, edge = edge, pull_up_down = pull_up_down)
 		RPIO.add_interrupt_callback(self.GPIO_1, self.addBitToTag, edge = edge, pull_up_down = pull_up_down)
+		
+		RPIO.input(self.GPIO_0)
+		RPIO.input(self.GPIO_1)
     
 		#Initializing timer
 		self.t = threading.Timer(0.1, self.processTag)
