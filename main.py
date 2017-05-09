@@ -26,7 +26,6 @@ def closeProgram(signal, frame):
 	sys.exit(0)
 
 signal.signal(signal.SIGINT, closeProgram)
-	
 
 #Starting readers
 readersCount = 1

@@ -9,7 +9,7 @@ class CardReader(object):
 		self.name = name
 		self.GPIO_0 = GPIO_0
 		self.GPIO_1 = GPIO_1
-	
+
 		self.tag = "" #The buffer used to store the RFID Tag
 		self.TIMEOUT = TIMEOUT #Real time allowed for the transmission
 		return super().__init__()
@@ -24,14 +24,14 @@ class CardReader(object):
 		if gpio_id == self.GPIO_0:
 			self.tag += "0"
 		elif gpio_id == self.GPIO_1:
-			self.tag += "1"	
+			self.tag += "1"
 
 	def registerReader(self, edge = 'falling', pull_up_down=RPIO.PUD_UP):
 		RPIO.setup(self.GPIO_0, RPIO.IN)
 		RPIO.setup(self.GPIO_1, RPIO.IN)
 		RPIO.add_interrupt_callback(self.GPIO_0, self.addBitToTag, edge = edge, pull_up_down = pull_up_down)
 		RPIO.add_interrupt_callback(self.GPIO_1, self.addBitToTag, edge = edge, pull_up_down = pull_up_down)
-		 
+
 		#Initializing timer
 		self.t = threading.Timer(0.1, self.processTag)
 		self.t.start()
@@ -48,7 +48,7 @@ class CardReader(object):
 			print("[" + self.name + "] Frame of length (" + str(len(self.tag)) + "):" + self.tag + " DROPPED")
 		elif self.verifyParity(self.tag):
 			print("[" + self.name + "] Frame of length (" + str(len(self.tag)) + "): " + self.tag + " (" + str(CardReader.binaryToInt(self.tag)) + ") OK KOI" )
-		
+
 		self.tag = ""
 
 	def verifyParity(self, binary_string):
@@ -56,7 +56,7 @@ class CardReader(object):
 		second_part = binary_string[13:]
 		parts = [first_part, second_part]
 		bitsTo1 = [0, 0]
-		index = 0		
+		index = 0
 
 		for part in parts:
 			bitsTo1[index] = part.count('1')
